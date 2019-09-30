@@ -24,6 +24,7 @@ def is_word(val, node):
     return node.children[index].isWord
   else:
     return is_word(val[1:], node.children[index])
+
 def find_word(val, node):
     index = ord(val[0])%97
     if node.children[index] == None:
@@ -37,34 +38,19 @@ def find_word(val, node):
 def traverse(node,word):
     global counter
     global resulting_words
-    # word = word + node.cargo
-    print('counter '+str(counter))
-    # print('node children'+str(node.children))
-    print(node.isWord)
-    print('resulting words array:')
     if  node.isWord == True:        
         print('word: '+word)
-        append_count = True
-        for words in resulting_words:
-            if words == word:
-                append_count = False        
-        if append_count:
-            resulting_words.append(word)            
-            counter = counter+1        
+        resulting_words.append(word)            
+        counter = counter+1        
         for nodeys in node.children:            
             if nodeys != None and counter<10:
                 traverse(nodeys,word+nodeys.cargo)
-            else:
-                return
     else:
         for nodey in node.children:
-            if nodey == None:
-                return
-            else:
-                traverse(nodey,word+nodey.cargo)       
+            if nodey != None:                
+                traverse(nodey,word+nodey.cargo)
 
 def main():
-#   root = Node(None)
   global root
   global counter
   f= open('words.txt','r')
@@ -82,11 +68,10 @@ def main():
     resulting_words = []
     counter = 0
     baseNode = find_word(test.lower(),baseNode)
-    # print(is_word(test.lower(), root))
-    # print(find_word(test.lower(), root))
-    # print(find_word(test.lower(),root).cargo,find_word(test.lower(),root).isWord)
-    traverse(baseNode,test.lower())
-    # print(len(resulting_words))
+    if baseNode!=None:        
+        traverse(baseNode,test.lower())
+    else:
+        print('value does not return any suggestions')
     for word in resulting_words:
         print(word)
     resulting_words = ''
