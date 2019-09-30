@@ -33,10 +33,14 @@ def is_word(word, node) -> bool:
       return is_word(word[1:],node.children[ord(word[0])-97])
     else:
       return False
-
+def find_word(word, node):
+    if len(word)==1:
+        if
 for word in storedWords:
   root = build(root, word)
-    
+
+
+
 print('Done with tree building')
 testWord = 'convuluted'
 print('Is '+testWord+' a word?: ')
