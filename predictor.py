@@ -1,13 +1,31 @@
-#Justin Treece made dis
-#!*!*!*!*!*!*! IMPORTANT!*!*!*!*!*!*!*
-#unless you install the pynput with the command:
-#pip install pynput
-#There WILL  be errors with this program probably saying something along the lines of 
-#cannot find pynput.keyboard
-#in order to run this command you must have an updated pip 
-#additionally this was made in python 3.7!!! could be cross compatible with 2 but unlikely
 from pynput.keyboard import Key, Listener
 import getpass
+#Justin Treece made dis
+
+
+#!*!*!*!*!*!*! IMPORTANT RUNNING INFO!*!*!*!*!*!*!*
+#unless you install the pynput with the command:
+#pip install pynput
+#or
+#pip3 install pynput
+#There WILL  be errors with this program probably saying something along the lines of 
+#cannot find pynput.keyboard
+#in order to run this command you must have an updated pip
+#command to update pip is: python -m pip install --upgrade pip
+#or
+#python3 -m pip install --upgrade pip
+#both the library command and the upgrade pip require admin level permissions (wouldnt work on a school computer unless you're admin)
+#additionally this was made in python 3.7!!! could be cross compatible with 2 but unlikely
+#make sure that if you're using python3 and not python 2 run it with python3 not sure if python will work
+
+#run command python3/python predictor.py
+#must have words.txt in the same directory
+
+#The program definetly works to your specifications so if you have any problems running it let me know, I can probably solve then and if not
+#I can always record a video or screenshare my application working
+
+#pynput is my library for the keyboard interrupts, getpass is so when you type into
+#the "input" field your deletions and insertions wont affect whats printed out directly after
 class Node:
   def __init__(self, cargo, children=None, isWord = False):
     self.isWord = isWord
@@ -17,7 +35,8 @@ keyvalue = ''
 counter = 0
 resulting_words = []
 root = Node(None)
-#builds the tree
+#builds the tree, characters are put 0-25 based on how far they are on the alphabet
+#for example a is index 0 z is index 25
 def build(node, val):
   index = ord(val[0])%97
   if node.children[index] == None:
@@ -27,7 +46,8 @@ def build(node, val):
   else:
     node.children[index] = build(node.children[index], val[1:])
   return node
-#used this method to check and make sure that my tree was fully functioning. Just finds words. Ended up using
+#used this method to check and make sure that my tree was fully functioning. Just confirms
+# whether a word is a word or not. Ended up using
 #a similar method to find words in traverse
 def is_word(val, node):
   index = ord(val[0])%97
@@ -111,6 +131,7 @@ def run_traverse(test):
       print(word)
   resulting_words = []
 
+#without a main method python gets confused and wont run the file
 def main():
   global root
   global counter
@@ -136,5 +157,6 @@ def main():
     #this with a input which shows what you're typing in. This had some very strange and wild effects on printed values
     #genuinely I could have found a bug with python
     test = getpass.getpass('')
+#this is another part to make the file always run
 if __name__ == "__main__":
   main()
